@@ -39,11 +39,15 @@ background-size: cover;">
                         <input class="form-control " style="background: transparent;border:none;"type="file"
                             name="img" value="{{ old('img') }}">
                     </div>
+                    @if ($pokemons->img == null)
+
                     <span class=" btn-outline-danger">
                         @error('img')
                             {{ $message }}
                         @enderror
                     </span>
+                    @endif
+
                     <div class="pb-3">
                         <input class="form-control " style="background: transparent;border:none;"type="number"
                             name="niveau" placeholder="1-100" value={{ $pokemons->niveau }} value="{{ old('niveau') }}">

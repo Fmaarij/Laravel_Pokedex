@@ -124,9 +124,12 @@ class PokemonController extends Controller {
         $pokemons->typepokemon_id = $typepokemons->id;
         $typepokemons->save();
 
-        Storage::delete( 'public/img/', $request->img );
-        Storage ::put( 'public/img/', $request->file( 'img' ) );
-        $pokemons->img = $request->file( 'img' )->hashName();
+        if ( $request->file( 'img' ) != null ) {
+            Storage::delete( 'public/img/'.$pokemons->img );
+            Storage ::put( 'public/img/', $request->file( 'img' ) );
+            $pokemons->img = $request->file( 'img' )->hashName();
+            $pokemons->save();
+        }
 
         $pokemons->niveau = $request->niveau;
 
