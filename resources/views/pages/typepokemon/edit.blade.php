@@ -1,7 +1,7 @@
 @extends('layouts.index')
 @section('content')
 <div class="container my-5">
-<form action="/update/{{$typepokemons->id}}" method="post" enctype="multipart/form-data">
+<form action="/updatetype/{{$typepokemons->id}}" method="post" enctype="multipart/form-data">
 @csrf
 @method('PUT')
 <label for="">Type</label>

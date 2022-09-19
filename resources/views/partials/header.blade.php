@@ -8,14 +8,17 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{route('home')}}">Acceuils</a>
+            <a class="nav-link" href="{{route('type')}}">Type</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('typecreate')}}">Ajouter Pokemon</a>
+            <a class="nav-link" href="{{route('typecreate')}}">Ajouter Type</a>
           </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link" href="{{route('joueurcreate')}}">Ajouter Un joueur</a>
-          </li> --}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('pokemon')}}">Pokemon</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('pokemoncreate')}}">Ajouter Pokemon</a>
+          </li>
         </ul>
       </div>
     </div>

@@ -4,42 +4,58 @@ background-attachment: fixed;
 background-size: cover;">
 @extends('layouts.index')
 @section('content')
-<div class="container my-5  ">
+{{-- <div class="container my-5  ">
 <table class="table table-striped table-bordered table-hover table">
  <thead>
-    <tr class=" text-light ">
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Age</th>
-        <th>Tel</th>
-        <th>Email</th>
-        <th>Genre</th>
-        <th>Pays de Joueur</th>
-        <th>Role</th>
-        <th>Photo</th>
-        <th>Equipe</th>
+    <tr class="  ">
+        <th>Name</th>
+        <th>type_id</th>
+        <th>image</th>
+        <th>Niveau</th>
+
     </tr>
  </thead>
  <tbody>
-    @foreach ($joueurs as $joueur )
+    @foreach ($pokemons as $pokemon )
 
-    <tr class="text-light" >
-        <td>{{$joueur->nom}}</td>
-        <td>{{$joueur->prenom}}</td>
-        <td>{{$joueur->age}}</td>
-        <td>{{$joueur->telephone}}</td>
-        <td>{{$joueur->email}}</td>
-        <td>{{$joueur->genre}}</td>
-        <td>{{$joueur->pays}}</td>
-        <td>{{$joueur->role->role}}</td>
+    <tr class="" >
+        <td>{{$pokemon->name}}</td>
+        <td>{{$pokemon->typepokemon_id}}</td>
         <td width="10%">
-        <img width="100%" class="rounded-pill" src="{{asset('storage/img/'.$joueur->photo->photo)}}" alt="">
-        </td>
-        <td>{{$joueur->equipe->nomdeclub}}</td>
+            <img width="100%" class="rounded-pill" src="{{asset('storage/img/'.$pokemon->img)}}" alt="">
+            </td>
+        <td>{{$pokemon->niveau}}</td>
+            <td>
+                <a href="/show/{{$pokemon->id}}" class="">
+                    <button class="btn btn-outline-info">Show</button>
+                  </a>
+            </td>
     </tr>
     @endforeach
  </tbody>
-</table>
+</table> --}}
+<div class="container my-5">
+    <div class="row   "  >
+        @foreach ($pokemons as $pokemon )
+        <div class="col-sm-6 text-center ">
+          <div class="card  rounded-pill w-50 m-auto " >
+            <div class="card-body opacity-25 w-100 p-5  m-auto bg-info  rounded-pill ">
+              <p class="card-text">Name: {{$pokemon->name}}</p>
+              <p>Type_ID: {{$pokemon->id}}</p>
+              <p width="10%">
+                <img width="100%" class="rounded-pill" src="{{asset('storage/img/'.$pokemon->img)}}" alt="">
+              </p>
+              <p>Niveau : {{$pokemon->niveau}}</p>
+
+              <a href="/showpok/{{$pokemon->id}}" class="">
+                <button class="btn btn-outline-light">Show</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+
 </div>
 </div>
 @endsection

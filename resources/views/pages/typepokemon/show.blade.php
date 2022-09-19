@@ -35,11 +35,12 @@ background-size: cover;">
                             {{-- <h5 class="card-title">Nom De Club : {{$equipes->nomdeclub}}</h5> --}}
                             <p class="card-text">ID : {{ $typepokemons->id }}</p>
                             <p>Type : {{ $typepokemons->type }}</p>
-                            <a href="/edit/{{ $typepokemons->id }}" class="">
+                            <a href="/edittype/{{ $typepokemons->id }}" class="">
                                 <button class="btn btn-outline-light">Edit type</button>
                             </a>
                             <div class="pt-2">
-                                <form action="/delete/{{$typepokemons->id}}" method="post" enctype="multipart/form">
+                                <form action="/{{$typepokemons->id}}/deletetype" method="post" enctype="multipart/form">
+                                    @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger">Supprimer</button>
                                 </form>
