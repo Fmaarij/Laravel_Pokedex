@@ -39,7 +39,7 @@ background-size: cover;">
                                 <button class="btn btn-outline-light">Edit type</button>
                             </a>
                             <div class="pt-2">
-                                <form action="/{{$typepokemons->id}}/deletetype" method="post" enctype="multipart/form">
+                                <form action="/{{ $typepokemons->id }}/deletetype" method="post" enctype="multipart/form">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger">Supprimer</button>

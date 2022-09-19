@@ -38,6 +38,14 @@ class TypepokemonController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'type' => 'required|min:3, |max:20',
+        ],
+        [
+
+            'type.required' => ' Veuillez écrive un type de Pokemon qui comporte max max:20 carectères'
+        ]);
+
         $typepokemons=new Typepokemon;
         $typepokemons->type = $request->type;
         $typepokemons->save();
@@ -77,6 +85,15 @@ class TypepokemonController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'type' => 'required|min:3, |max:20',
+        ],
+        [
+
+            'type.required' => ' Veuillez écrive un type de Pokemon qui comporte max max:20 carectères'
+        ]);
+
         $typepokemons= Typepokemon::find($id);
         $typepokemons->type = $request->type;
         $typepokemons->save();

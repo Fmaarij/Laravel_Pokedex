@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the 'web' middleware group. Now create something great!
 |
 */
 
@@ -22,7 +22,7 @@ Route::post( '/createtype', [ TypePokemonController::class, 'store' ] );
 Route::get( '/showtype/{id}', [ TypePokemonController::class, 'show' ] );
 Route::get( '/edittype/{id}', [ TypePokemonController::class, 'edit' ] );
 Route::put( '/updatetype/{id}', [ TypePokemonController::class, 'update' ] );
-Route::delete('/{id}/deletetype', [ TypePokemonController::class, 'destroy'] );
+Route::delete( '/{id}/deletetype', [ TypePokemonController::class, 'destroy' ] );
 // End of route typepokemon
 
 //  Route pokemon
@@ -32,5 +32,5 @@ Route::post( '/createpok', [ PokemonController::class, 'store' ] );
 Route::get( '/showpok/{id}', [ PokemonController::class, 'show' ] );
 Route::get( '/editpok/{id}', [ PokemonController::class, 'edit' ] );
 Route::put( '/updatepok/{id}', [ PokemonController::class, 'update' ] );
-Route::delete('/{id}/deletepok', [ PokemonController::class, 'destroy'] );
+Route::delete( '/{id}/deletepok', [ PokemonController::class, 'destroy' ] );
 // End of route pokemon

@@ -19,7 +19,7 @@ class PokemonController extends Controller {
     public function index() {
         $pokemons = Pokemon::all();
         $typepokemons = Typepokemon::all();
-        return view( 'pages.pokemons.index', compact( 'pokemons','typepokemons' ) );
+        return view( 'pages.pokemons.index', compact( 'pokemons', 'typepokemons' ) );
     }
 
     /**
@@ -30,7 +30,7 @@ class PokemonController extends Controller {
 
     public function create() {
         $typepokemons = Typepokemon::all();
-        return view( 'pages.pokemons.create',compact('typepokemons') );
+        return view( 'pages.pokemons.create', compact( 'typepokemons' ) );
     }
 
     /**
@@ -42,11 +42,24 @@ class PokemonController extends Controller {
 
     public function store( Request $request ) {
 
+        $request->validate( [
+            'name' => 'required|min:1,|max:20',
+            // 'typepokemon_id' => 'required',
+            'img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+            'niveau' => 'required|numeric|min:1, |max:100',
+
+        ],
+        [
+            'A_nom.required' => ' Faut min 1 et max 20 caractères',
+            // 'typepokemon_id.required' => ' Faut max 300 caractères',
+            'img.required' => 'extentions accepté jpg,png,jpeg,gif,svg, qualité 2048, min_width=100,min_height=100,max_width=1000,max_height=1000',
+            'niveau.required' => ' Entrez des chiffres entre 1 et 100'
+        ] );
+
         $pokemons = new Pokemon;
         $pokemons->name = $request->name;
 
         $pokemons->typepokemon_id = $request->typepokemon_id;
-
 
         Storage ::put( 'public/img/', $request->file( 'img' ) );
         $pokemons->img = $request->file( 'img' )->hashName();
@@ -64,9 +77,9 @@ class PokemonController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function show( $id) {
-        $pokemons = Pokemon::find($id);
-        return view('pages.pokemons.show', compact('pokemons'));
+    public function show( $id ) {
+        $pokemons = Pokemon::find( $id );
+        return view( 'pages.pokemons.show', compact( 'pokemons' ) );
     }
 
     /**
@@ -76,11 +89,11 @@ class PokemonController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function edit($id ) {
-        $pokemons = Pokemon::find($id);
+    public function edit( $id ) {
+        $pokemons = Pokemon::find( $id );
         $typepokemons = Typepokemon::all();
-        $typeid = Typepokemon::find($id);
-        return view('pages.pokemons.edit', compact('pokemons','typepokemons','typeid'));
+        $typeid = Typepokemon::find( $id );
+        return view( 'pages.pokemons.edit', compact( 'pokemons', 'typepokemons', 'typeid' ) );
     }
 
     /**
@@ -91,13 +104,27 @@ class PokemonController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function update( Request $request, $id) {
-        $pokemons = Pokemon::find($id);
+    public function update( Request $request, $id ) {
+        $request->validate( [
+            'name' => 'required|min:1,|max:20',
+            // 'typepokemon_id' => 'required',
+            'img' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+            'niveau' => 'required|numeric|min:1, |max:100',
+
+        ],
+        [
+            'A_nom.required' => ' Faut min 1 et max 20 caractères',
+            // 'typepokemon_id.required' => ' Faut max 300 caractères',
+            'img.required' => 'extentions accepté jpg,png,jpeg,gif,svg, qualité 2048, min_width=100,min_height=100,max_width=1000,max_height=1000',
+            'niveau.required' => ' Entrez des chiffres entre 1 et 100'
+        ] );
+        $pokemons = Pokemon::find( $id );
         $pokemons->name = $request->name;
+        $typepokemons = Typepokemon::find( $id );
+        $pokemons->typepokemon_id = $typepokemons->id;
+        $typepokemons->save();
 
-        $pokemons->typepokemon_id = $request->typepokemon_id;
-
-        Storage::delete('public/img/', $request->img);
+        Storage::delete( 'public/img/', $request->img );
         Storage ::put( 'public/img/', $request->file( 'img' ) );
         $pokemons->img = $request->file( 'img' )->hashName();
 
@@ -115,11 +142,11 @@ class PokemonController extends Controller {
     */
 
     public function destroy( Pokemon $pokemon, $id ) {
-        $pokemons = Pokemon::find($id);
+        $pokemons = Pokemon::find( $id );
         // $pokemons->typepokemon()->delete();
-        Storage::delete('public/img/'.$pokemons->img);
+        Storage::delete( 'public/img/'.$pokemons->img );
         $pokemons->delete();
 
-        return redirect('/');
+        return redirect( '/' );
     }
 }
